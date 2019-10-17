@@ -127,7 +127,7 @@ const PS = eval("'\u2029'");
 `JSON.stringify()`的问题在于，它可能返回`0xD800`到`0xDFFF`之间的单个码点。
 
 ```javascript
-JSON.stringify('\u{D834}') // "\u{D834}"
+JSON.stringify('\u{D834}') // ""\\uD834""
 ```
 
 为了确保返回的是合法的 UTF-8 字符，[ES2019](https://github.com/tc39/proposal-well-formed-stringify) 改变了`JSON.stringify()`的行为。如果遇到`0xD800`到`0xDFFF`之间的单个码点，或者不存在的配对形式，它会返回转义字符串，留给应用自己决定下一步的处理。
